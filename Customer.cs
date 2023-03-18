@@ -15,6 +15,21 @@ namespace VideoRental
     public void addRental(Rental arg) { customerRental.Add(arg); }
     public string getName() { return customerName; }
 
+    public bool addReturn(string arg)
+    {
+        var rentalMovie = customerRental.Where(rental => rental.getMovie().getTitle() == arg).FirstOrDefault();
+        if(rentalMovie != null)
+        {
+            customerRental.Remove(rentalMovie);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+
     public string statement()
     {
         double totalAmount = 0.0;
