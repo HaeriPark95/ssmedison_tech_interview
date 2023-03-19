@@ -28,12 +28,12 @@ namespace VideoRental
 
         private static void SetDefaultVideoList()
         {
-            ownedMovieList.Add(new Movie("일반 1", Movie.REGULAR));
-            ownedMovieList.Add(new Movie("일반 2", Movie.REGULAR));
-            ownedMovieList.Add(new Movie("신작 1", Movie.NEW_RELEASE));
-            ownedMovieList.Add(new Movie("신작 2", Movie.NEW_RELEASE));
-            ownedMovieList.Add(new Movie("어린이 1", Movie.CHILDRENS));
-            ownedMovieList.Add(new Movie("어린이 2", Movie.CHILDRENS));
+            ownedMovieList.Add(new Movie("일반 1", MOVETYPE.REGULAR));
+            ownedMovieList.Add(new Movie("일반 2", MOVETYPE.REGULAR));
+            ownedMovieList.Add(new Movie("신작 1", MOVETYPE.NEW_RELEASE));
+            ownedMovieList.Add(new Movie("신작 2", MOVETYPE.NEW_RELEASE));
+            ownedMovieList.Add(new Movie("어린이 1", MOVETYPE.CHILDRENS));
+            ownedMovieList.Add(new Movie("어린이 2", MOVETYPE.CHILDRENS));
         }
 
         private static void SetCustomerList()

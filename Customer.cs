@@ -54,21 +54,21 @@ namespace VideoRental
 
             switch (each.getMovie().getPriceCode())
             {
-                case Movie.REGULAR:
+                case MOVETYPE.REGULAR:
                     thisAmount += 2.0;
                     if (each.getDaysRented() > 2)
                         thisAmount += (each.getDaysRented() - 2) * 1.5;
                     break;
-                case Movie.NEW_RELEASE:
+                case MOVETYPE.NEW_RELEASE:
                     thisAmount += each.getDaysRented() * 3;
                     break;
 
-                case Movie.CHILDRENS:
+                case MOVETYPE.CHILDRENS:
                     thisAmount += 1.5;
                     if (each.getDaysRented() > 3)
                         thisAmount += (each.getDaysRented() - 3) * 1.5;
                     break;
-                case Movie.EXAMPLE_GENRE:
+                case MOVETYPE.EXAMPLE_GENRE:
                     thisAmount += each.getDaysRented() * 3;
                     break;
             }
@@ -77,7 +77,7 @@ namespace VideoRental
             frequentRenterPoints++;
 
             // Add bonus for a two day new release rental
-            if ((each.getMovie().getPriceCode() == Movie.NEW_RELEASE)
+            if ((each.getMovie().getPriceCode() == MOVETYPE.NEW_RELEASE)
                     && each.getDaysRented() > 1) frequentRenterPoints++;
 
             // Show figures for this rental

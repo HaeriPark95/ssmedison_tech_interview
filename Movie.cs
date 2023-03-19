@@ -5,24 +5,27 @@ using System.Text;
 
 namespace VideoRental
 {
+  public enum MOVETYPE
+  {
+     REGULAR,
+     NEW_RELEASE,
+     CHILDRENS,
+     EXAMPLE_GENRE,
+  }
+
   public class Movie
   {
-    public const int CHILDRENS = 2;
-    public const int REGULAR = 0;
-    public const int NEW_RELEASE = 1;
-    public const int EXAMPLE_GENRE = 3;
-
-    public Movie(string title, int priceCode = REGULAR)
+    public Movie(string title, MOVETYPE priceCode = MOVETYPE.REGULAR)
     {
         movieTitle = title;
         moviePriceCode = priceCode;
     }
 
-    public int getPriceCode() { return moviePriceCode; }
-    public void setPriceCode(int args) { moviePriceCode = args; }
+    public MOVETYPE getPriceCode() { return moviePriceCode; }
+    public void setPriceCode(MOVETYPE args) { moviePriceCode = args; }
     public string getTitle() { return movieTitle; }
 
     private string movieTitle;
-    int moviePriceCode;
+    MOVETYPE moviePriceCode;
   }
 }
