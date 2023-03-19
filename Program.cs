@@ -14,16 +14,12 @@ namespace VideoRental
 
         static void Main(string[] args)
         {
-            //rental shop movie title & code setting
             SetDefaultVideoList();
             SetCustomerList();
 
             ShowConsoleMenuView();
 
             while(RunMainMenu());
-
-            //statement -> recipt
-            //Console.Write(customer.statement());
         }
 
         private static void SetDefaultVideoList()
@@ -95,11 +91,11 @@ namespace VideoRental
         private static void PrintAllVideoTitle()
         {
             StringBuilder videoList = new StringBuilder();
-            videoList.AppendLine("Code" + '\t' + "Title");
+            videoList.AppendLine("Code".PadRight(10) + '\t' + "Title");
 
             foreach(var movie in ownedMovieList)
             {
-                videoList.AppendLine( movie.getPriceCode() + '\t' + '\t' + movie.getTitle());
+                videoList.AppendLine( movie.getPriceCode().ToString().PadRight(10) + '\t' + movie.getTitle());
             }
             Console.WriteLine(videoList.ToString());
 
@@ -115,8 +111,7 @@ namespace VideoRental
             Input Period : 
             
             Continue? (Y/N) // Y입력 시 Rental 메뉴 반복 N 입력 시 Main Menu로 이동
-            ----------------------
-            */
+            ----------------------*/
             ConsoleKey continueRental = ConsoleKey.Y;
 
             do
@@ -180,6 +175,12 @@ namespace VideoRental
 
         private static void Return()
         {
+            /*---Return Menu-----
+            Input customer ID :
+            Input Video Title :
+            
+            Continue? (Y/N) // Y입력 시 Rental 메뉴 반복 N 입력 시 Main Menu로 이동
+            -----------------------*/
             ConsoleKey continueReturn = ConsoleKey.Y;
 
             do
