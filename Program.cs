@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -74,6 +75,10 @@ namespace VideoRental
                             Rental();
                             break;
                         case 2:
+                            Return();
+                            break;
+                        case 3:
+                            SaveToFile();
                             break;
                         case 5:
                             return false;
@@ -215,5 +220,28 @@ namespace VideoRental
             ShowConsoleMenuView();
         }
 
+        private static void SaveToFile()
+        {
+            StringBuilder customersRental = new StringBuilder();
+
+            registeredCustomerList.ForEach(customer =>
+            {
+                if(customer.getRentalExist())
+                {
+                    customersRental.AppendLine(customer.statement());
+                }
+            });
+
+            string dateTime = DateTime.Now.ToString("yyyy-MM-dd_hh:mm:ss");
+            FileStream filestream = new FileStream($"savetofile_{dateTime}.txt", FileMode.Create);
+            var streamwriter = new StreamWriter(filestream);
+            streamwriter.Write(customersRental.ToString());
+            streamwriter.AutoFlush = true;
+            streamwriter.Close();
+
+            ShowConsoleMenuView();
+            return;
+        }
+        
     }
 }
