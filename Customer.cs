@@ -41,8 +41,9 @@ namespace VideoRental
 
         result.AppendLine("Rental Record for" + getName());
 
+        newResult.AppendLine("-----------------------------------");
         newResult.AppendLine("New Rental Record for "+getName());
-        newResult.AppendLine("\t" + "장르" + "\t" + "제목" + "\t" + "대여기간" + "\t" + "가격");
+        newResult.AppendLine("\t" + "장르".PadRight(3) + "\t" + "제목".PadRight(8) + "\t" + "대여기간".PadRight(8) + "\t" + "가격".PadRight(3));
 
         IEnumerator<Rental> enumerator = customerRental.GetEnumerator();
 
@@ -81,13 +82,16 @@ namespace VideoRental
 
             // Show figures for this rental
             result.AppendLine("\t" + each.getMovie().getTitle() + "\t" + thisAmount.ToString());
-            newResult.AppendLine("\t" + each.getMovie().getPriceCode() + "\t" + each.getMovie().getTitle() + "\t" +
-                                 each.getDaysRented() + "\t" + thisAmount.ToString());
+            newResult.AppendLine("\t" + each.getMovie().getPriceCode().ToString().PadRight(3) + "\t" + each.getMovie().getTitle().PadRight(8) + "\t" +
+                                 each.getDaysRented().ToString().PadRight(8) + "\t" + thisAmount.ToString().ToString().PadRight(3));
             totalAmount += thisAmount;
         }
 
         result.AppendLine("Amount owed is " + totalAmount);
         result.AppendLine("You earned " + frequentRenterPoints + " frequent renter points");
+
+        newResult.AppendLine("Amount owed is " + totalAmount);
+        newResult.AppendLine("You earned " + frequentRenterPoints + " frequent renter points");
 
         result.AppendLine(newResult.ToString());
 
