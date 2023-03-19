@@ -57,7 +57,7 @@ namespace VideoRental
         private static bool RunMainMenu()
         {
             int menu = 0;
-            do
+            while (menu != 5)
             {
                 var menuInput = Console.ReadLine();
                 if (int.TryParse(menuInput, out menu))
@@ -83,7 +83,7 @@ namespace VideoRental
                             return false;
                     }
                 }
-            } while (menu != 5);
+            }
             
             return true;
         }
@@ -114,16 +114,16 @@ namespace VideoRental
             ----------------------*/
             ConsoleKey continueRental = ConsoleKey.Y;
 
-            do
+            while(continueRental == ConsoleKey.Y)
             {
                 StringBuilder menu = new StringBuilder();
                 menu.AppendLine("---Rental Menu-----");
                 Console.WriteLine(menu);
-                string customerid;
+                string customerid = "";
                 Movie rentalMovie = ownedMovieList.FirstOrDefault();
                 bool validCustomer = false;
                 bool validTitle= false;
-                do
+                while (!validCustomer)
                 {
                     menu = new StringBuilder();
                     menu.AppendLine("Input customer ID :");
@@ -136,9 +136,9 @@ namespace VideoRental
                             validCustomer = true;
                         }
                     }
-                } while (!validCustomer);
+                }
 
-                do
+                while (!validTitle)
                 {
                     menu = new StringBuilder();
                     menu.AppendLine("Input Video Title :");
@@ -152,22 +152,30 @@ namespace VideoRental
                             validTitle = true;
                         }
                     }
-                } while (!validTitle);
+                }
 
                 int period = 0;
-                menu = new StringBuilder();
-                menu.AppendLine("Input Period :");
-                Console.WriteLine(menu);
-                var inputperiod = Console.ReadLine();
-                period = int.Parse(inputperiod);
-
+                bool validPeriod = false;
+                
+                while(!validPeriod)
+                {
+                    menu = new StringBuilder();
+                    menu.AppendLine("Input Period :");
+                    Console.WriteLine(menu);
+                    var inputperiod = Console.ReadLine();
+                    if (int.TryParse(inputperiod, out period))
+                    {
+                        validPeriod = true;
+                    }
+                }
+                
                 var rentalcustomer = registeredCustomerList.Where(cus => cus.getName() == customerid).FirstOrDefault();
                 rentalcustomer.addRental(new Rental(rentalMovie, period));
 
                 Console.WriteLine("Continue? (Y/N)");
                 continueRental = Console.ReadKey().Key;
 
-            } while (continueRental == ConsoleKey.Y);
+            }
 
             ShowConsoleMenuView();
             return;
@@ -183,16 +191,16 @@ namespace VideoRental
             -----------------------*/
             ConsoleKey continueReturn = ConsoleKey.Y;
 
-            do
+            while(continueReturn == ConsoleKey.Y)
             {
                 StringBuilder menu = new StringBuilder();
                 menu.AppendLine("---Return Menu-----");
                 Console.WriteLine(menu);
-                string customerid;
+                string customerid = "";
                 Movie returnMovie = ownedMovieList.FirstOrDefault();
                 bool validCustomer = false;
                 bool validTitle = false;
-                do
+                while (!validCustomer)
                 {
                     menu = new StringBuilder();
                     menu.AppendLine("Input customer ID :");
@@ -205,9 +213,9 @@ namespace VideoRental
                             validCustomer = true;
                         }
                     }
-                } while (!validCustomer);
+                }
 
-                do
+                while (!validTitle)
                 {
                     menu = new StringBuilder();
                     menu.AppendLine("Input Video Title :");
@@ -215,12 +223,12 @@ namespace VideoRental
                     var title = Console.ReadLine();
                     var customer = registeredCustomerList.Where(cus => cus.getName() == customerid).FirstOrDefault();
                     validTitle = customer.addReturn(returnMovie.getTitle());
-                } while (!validTitle);
+                }
 
                 Console.WriteLine("Continue? (Y/N)");
                 continueReturn = Console.ReadKey().Key;
 
-            } while (continueReturn == ConsoleKey.Y);
+            }
 
             ShowConsoleMenuView();
         }
@@ -255,7 +263,7 @@ namespace VideoRental
             Console.WriteLine(menu);
             string customerid;
             bool validCustomer = false;
-            do
+            while (!validCustomer)
             {
                 menu = new StringBuilder();
                 menu.AppendLine("Input customer ID :");
@@ -270,7 +278,7 @@ namespace VideoRental
                         validCustomer = true;
                     }
                 }
-            } while (!validCustomer);
+            }
 
             ShowConsoleMenuView();
             return;
