@@ -236,7 +236,7 @@ namespace VideoRental
                 }
             });
 
-            string dateTime = DateTime.Now.ToString("yyyy-MM-dd_hh:mm:ss");
+            string dateTime = DateTime.Now.ToString("yyyy-MM-dd_hh;mm;ss");
             FileStream filestream = new FileStream($"savetofile_{dateTime}.txt", FileMode.Create);
             var streamwriter = new StreamWriter(filestream);
             streamwriter.Write(customersRental.ToString());
