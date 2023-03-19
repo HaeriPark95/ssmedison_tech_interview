@@ -10,6 +10,7 @@ namespace VideoRental
     public const int CHILDRENS = 2;
     public const int REGULAR = 0;
     public const int NEW_RELEASE = 1;
+    public const int EXAMPLE_GENRE = 3;
 
     public Movie(string title, int priceCode = REGULAR)
     {

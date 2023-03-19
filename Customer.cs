@@ -14,6 +14,7 @@ namespace VideoRental
 
     public void addRental(Rental arg) { customerRental.Add(arg); }
     public string getName() { return customerName; }
+    public bool getRentalExist() { return customerRental.Any(); }
 
     public bool addReturn(string arg)
     {
@@ -30,14 +31,18 @@ namespace VideoRental
 
     }
 
+    //영화별 가격, 합산가격, 획득한 포인트
     public string statement()
     {
         double totalAmount = 0.0;
         int frequentRenterPoints = 0;
         StringBuilder result = new StringBuilder();
+        StringBuilder newResult = new StringBuilder();
 
         result.AppendLine("Rental Record for" + getName());
 
+        newResult.AppendLine("New Rental Record for "+getName());
+        newResult.AppendLine("\t" + "장르" + "\t" + "제목" + "\t" + "대여기간" + "\t" + "가격");
 
         IEnumerator<Rental> enumerator = customerRental.GetEnumerator();
 
@@ -62,6 +67,9 @@ namespace VideoRental
                     if (each.getDaysRented() > 3)
                         thisAmount += (each.getDaysRented() - 3) * 1.5;
                     break;
+                case Movie.EXAMPLE_GENRE:
+                    thisAmount += each.getDaysRented() * 3;
+                    break;
             }
 
             // Add frequent renter points
@@ -73,11 +81,15 @@ namespace VideoRental
 
             // Show figures for this rental
             result.AppendLine("\t" + each.getMovie().getTitle() + "\t" + thisAmount.ToString());
+            newResult.AppendLine("\t" + each.getMovie().getPriceCode() + "\t" + each.getMovie().getTitle() + "\t" +
+                                 each.getDaysRented() + "\t" + thisAmount.ToString());
             totalAmount += thisAmount;
         }
 
         result.AppendLine("Amount owed is " + totalAmount);
         result.AppendLine("You earned " + frequentRenterPoints + " frequent renter points");
+
+        result.AppendLine(newResult.ToString());
 
         return result.ToString();
     }
