@@ -80,6 +80,9 @@ namespace VideoRental
                         case 3:
                             SaveToFile();
                             break;
+                        case 4:
+                            Receipt();
+                            break;
                         case 5:
                             return false;
                     }
@@ -172,6 +175,7 @@ namespace VideoRental
             } while (continueRental == ConsoleKey.Y);
 
             ShowConsoleMenuView();
+            return;
         }
 
         private static void Return()
@@ -243,5 +247,32 @@ namespace VideoRental
             return;
         }
         
+        private static void Receipt()
+        {
+            StringBuilder menu = new StringBuilder();
+            menu.AppendLine("---Receipt Menu-----");
+            Console.WriteLine(menu);
+            string customerid;
+            bool validCustomer = false;
+            do
+            {
+                menu = new StringBuilder();
+                menu.AppendLine("Input customer ID :");
+                Console.WriteLine(menu);
+                customerid = Console.ReadLine();
+                foreach (var customer in registeredCustomerList)
+                {
+                    if (customerid.Trim() == customer.getName())
+                    {
+                        string receipt = customer.statement();
+                        Console.WriteLine(receipt);
+                        validCustomer = true;
+                    }
+                }
+            } while (!validCustomer);
+
+            ShowConsoleMenuView();
+            return;
+        }
     }
 }
